@@ -6,6 +6,7 @@ from tasks.models import Task
 # List View
 def task_list(request):
     tasks = Task.objects.all()
+    print(tasks)
     context = {
         'tasks': tasks
     }
