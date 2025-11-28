@@ -1,14 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from tasks.models import Task
+from tasks.forms import TaskForm
 
 # Create your views here.
 
 # List View
 def task_list(request):
     tasks = Task.objects.all()
-    print(tasks)
+    form = TaskForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid:
+            form.save()
+            return redirect('task_list')
     context = {
-        'tasks': tasks
+        'tasks': tasks,
+        'form': form
     }
     return render(request, "index.html", context)
 
