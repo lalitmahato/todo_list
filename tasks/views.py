@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from tasks.models import Task
 from tasks.forms import TaskForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
-# List View
+@login_required(login_url='login')
 def task_list(request):
     tasks = Task.objects.all()
     form = TaskForm(request.POST or None)
@@ -19,6 +19,7 @@ def task_list(request):
     return render(request, "index.html", context)
 
 
+@login_required(login_url='login')
 def update_task(request, id):
     instance = Task.objects.get(id=id)
     tasks = Task.objects.all()
@@ -34,6 +35,7 @@ def update_task(request, id):
     return render(request, "index.html", context)
 
 
+@login_required(login_url='login')
 def delete_task(request, id):
     instance = Task.objects.get(id=id)
     instance.delete()
