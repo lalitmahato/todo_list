@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
+from users.decorators import unauthenticated_user
 
 
 def signup_view(request):
@@ -22,6 +23,7 @@ def signup_view(request):
     return render(request, 'users/signup.html', context)
 
 
+@unauthenticated_user
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -61,7 +63,7 @@ def change_password_view(request):
             # This is critical: keeps user logged in after password change
             update_session_auth_hash(request, user)
             messages.success(request, 'Your password was successfully updated!')
-            return redirect('login') # Or redirect to profile
+            return redirect('task_list') # Or redirect to profile
         else:
             messages.error(request, 'Please correct the error below.')
     else:
@@ -69,3 +71,7 @@ def change_password_view(request):
         for field in form.fields.values():
             field.widget.attrs['class'] = 'form-control'
     return render(request, 'users/change_password.html', {'form': form})
+
+
+def error_401(request):
+    return render(request, "401.html")

@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('tasks.urls')),
     path('user/', include('users.urls')),
+    path('class-based-view/', include('classbasedview.urls')),
 ]
 
 if settings.DEBUG:

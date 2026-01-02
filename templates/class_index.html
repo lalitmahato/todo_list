@@ -53,7 +53,7 @@
                 <td>{{ task.created_at }}</td>
                 <td>
                     {% if request.user|has_group:'admin' %}
-                        <a href="{% url 'update_task' task.id %}" class="btn btn-primary">Edit</a>
+                        <a href="{% url 'class_task_update' task.id %}" class="btn btn-primary">Edit</a>
                         <a href="{% url 'delete_task' task.id %}" class="btn btn-danger">Delete</a>
                     {% endif %}
                 </td>
