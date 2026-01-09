@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Delete</title>
+</head>
+<body>
+<div>
+    <h2>Delete Task?</h2>
+    <p>Are you sure you want to delete "{{ object.title }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm Delete</button>
+    </form>
+    <a href="{% url 'class_based_view:class_task_list' %}">Cancel</a>
+</div>
+</body>
+</html>

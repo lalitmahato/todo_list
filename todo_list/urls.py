@@ -24,6 +24,8 @@ urlpatterns = [
     path('', include('tasks.urls')),
     path('user/', include('users.urls')),
     path('class-based-view/', include('classbasedview.urls')),
+    path('api/v1/', include('djanog_rest.urls')),
+    path('api/v2/', include('api.urls')),
 ]
 
 if settings.DEBUG:
